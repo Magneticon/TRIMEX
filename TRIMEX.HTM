@@ -1,0 +1,156 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+    <HEAD>
+        <META CHARSET="UTF-8" AUTHOR="MAGNETICON">
+        <TITLE>TRIMEX 1.00</TITLE>
+        <STYLE TYPE="TEXT/CSS">
+            BODY{
+                COLOR: #00CC00;
+                BACKGROUND-COLOR: #000000;
+                FONT-SIZE: 20PX;
+                FONT-FAMILY: 'Pcomm Session', monospace;
+            }
+            #CMD{
+                WIDTH: 90VW;
+                HEIGHT: 12.5VH;
+            }
+            .INPOUT{
+                WIDTH: 45VW;
+                HEIGHT: 45VH;
+                COLOR: #00CCFF;
+                BACKGROUND-COLOR: #000000;
+                BORDER: 3PX SOLID #00CC00;
+                FONT-SIZE: 20PX;
+                BORDER-RADIUS: 10PX;
+                OVERFLOW: AUTO;
+            }
+            .OUT{
+                WIDTH: 90VW;
+                HEIGHT: 45VH;
+                OVERFLOW: AUTO;
+                BORDER: 3PX SOLID #00CC00;
+                COLOR: #FFCC00;
+                BACKGROUND-COLOR: #000000;
+                FONT-SIZE: 20PX;
+                BORDER-RADIUS: 10PX;
+            }
+            .TEXT{
+                BORDER: 3PX SOLID #00CC00;
+                COLOR: #FFCC00;
+                BACKGROUND-COLOR: #000000;
+                FONT-SIZE: 20PX;
+                BORDER-RADIUS: 10PX;
+                WIDTH: 70VW;
+            }
+            .OUTPUTS{
+                WIDTH: 95VW;
+                HEIGHT: 38VH;
+                OVERFLOW-Y: AUTO;
+                OVERFLOW-X: HIDDEN;
+                COLOR: #FFCC00;
+                BACKGROUND-COLOR: #000000;
+            }
+            #MBOX{
+                BACKGROUND-COLOR: #0000AA;
+                COLOR: #FF0000;
+                WIDTH: 30VH;
+                HEIGHT: 8VH;
+                RIGHT: 2VH;
+                TOP: 2VH;
+                DISPLAY: FLEX;
+                JUSTIFY-CONTENT: CENTER;
+                ALIGN-ITEMS: CENTER;
+                FONT-SIZE: 4.5VH;
+                FONT-FAMILY: ARIAL;
+                FONT-WEIGHT: BOLD;
+                POSITION: ABSOLUTE;
+                BORDER-RADIUS: 10PX;
+            }
+            #MBOX:HOVER{
+                BACKGROUND-COLOR: #FF0000;
+                COLOR: #0000AA;
+                CURSOR: POINTER;
+            }
+            .BUTTON{
+                COLOR: #00CC00;
+                BACKGROUND-COLOR: #000000;
+                BORDER: 3PX OUTSET #00CC00;
+                DISPLAY: INLINE-FLEX;
+                JUSTIFY-CONTENT: CENTER;
+                FONT-WEIGHT: BOLD;
+                ALIGN-ITEMS: CENTER;
+                /* WIDTH: 200PX; */
+                HEIGHT: 40PX;
+                CURSOR: POINTER;
+                BORDER-RADIUS: 25PX;
+                WIDTH: FIT-CONTENT;
+                WHITE-SPACE: NOWRAP;
+            }
+            .BUTTONTABLE{
+                BORDER-RADIUS: 0PX;
+                WIDTH: FIT-CONTENT;
+                WHITE-SPACE: NOWRAP;
+            }
+            .BUTTON:HOVER{
+                COLOR: #000000;
+                BACKGROUND-COLOR: #00CC00;
+            }
+            #RECORDS{
+                COLOR: #FF00CC;
+            }
+            .RECORD{
+                COLOR: #FF00CC;
+            }
+        </STYLE>
+        <SCRIPT TYPE="TEXT/JAVASCRIPT">
+            function RUN(T){
+                GtE("OUT").value = "";
+                var d1 = GtE("INP").value;
+                var H = d1.split(/\n/);
+                var R = "";
+                var Q = 0;
+                for (var i = 0; i < H.length; i++){
+                    var U = H[i];
+                    switch(T){
+                        case 1:
+                            U = U.trimStart();
+                            break;
+                        case 2:
+                            U = U.trimEnd();
+                            break;
+                        default:
+                            U = U.trim();
+                            break;
+                    }
+                    if (R != "") R += "\n";
+                    R += U;
+                    Q++;
+                }
+                GtE("OUT").value = R;
+                GtE("RECORDS").innerHTML = Q;
+            }
+            
+            function GtE(id){
+                return document.getElementById(id);
+            }
+        </SCRIPT>
+    </HEAD>
+    <BODY>
+        <H1>TRIMEX 1.00</H1>
+        <I>Save manual work and have your records trimmed from a thousands lines long text!</I>
+        <BR><BR>
+        <TABLE>
+            <TR>
+                <TD>INPUT:<BR><TEXTAREA ID="INP" CLASS="INPOUT"></TEXTAREA></TD>
+                <TD STYLE="WIDTH: 5VH;"></TD>
+                <TD>OUTPUT:<BR><TEXTAREA ID="OUT" CLASS="INPOUT"></TEXTAREA></TD>
+            </TR>
+        </TABLE>
+        <BR>
+        <SPAN CLASS="BUTTON" ONCLICK="JAVASCRIPT: RUN(0);">&nbsp;&nbsp;TRIM ALL&nbsp;&nbsp;</SPAN>
+        <SPAN CLASS="BUTTON" ONCLICK="JAVASCRIPT: RUN(1);">&nbsp;&nbsp;TRIM LEADING&nbsp;&nbsp;</SPAN>
+        <SPAN CLASS="BUTTON" ONCLICK="JAVASCRIPT: RUN(2);">&nbsp;&nbsp;TRIM TRAILING&nbsp;&nbsp;</SPAN>
+        <SPAN STYLE="POSITION: ABSOLUTE; RIGHT: 10VH;"><B>TOTAL AMOUNT OF LINES:&nbsp;</B><SPAN ID="RECORDS">0</SPAN></SPAN>
+        <DIV ID="MBOX" ONCLICK="JAVASCRIPT: window.open('https://github.com/Magneticon', '_blank');">Magneticon</DIV>
+    </BODY>
+</HTML>
